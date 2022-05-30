@@ -1,0 +1,54 @@
+
+.loyalty-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-loyl {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 7vw;
+    padding: 4vw;
+    border-radius: 0.5vw;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+.card-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 1vw;
+    border-radius: 0.5vw;
+    background-color: aquamarine;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+.user-fio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 1vw;
+    p {
+        font-size: 20px;
+    }
+}
+
+.card-med-info {
+    margin: 2vw;
+}
+
+.bonus-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0;
+}
+
+.card-item {
+    margin: 0;
+}
