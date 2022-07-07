@@ -1,5 +1,7 @@
 {
     "clinik_name": "Андромеда",
-    "medorgId": 1
+    "medorgId": 1,
+    "serverLink": "https://patient.simplex48.ru",
+    "proxiServerLink": "https://test.simplex48.ru"
 }
   

@@ -23,10 +23,38 @@
     overflow: auto;
 }
 
+.dateCreateProblem{
+    margin: 0;
+}
+
+.messages-list{
+    overflow: auto;
+    min-height: 390px;
+
+
+}
+
+
+.list-problem {
+    padding: 0;
+}
+.categori-item {
+    list-style-type: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.categori-selected {
+    color: white;
+    background-color: #279eee;
+    border-radius: 5px;
+}
+
 .problem-item {
     margin: 1rem;
     padding: 1rem;
     box-shadow: 2px 4px 14px 3px rgba(0, 0, 0, 0.25);
+    word-break: break-word;
     cursor: pointer;
 }
 
@@ -36,6 +64,7 @@
     justify-content: center;
     background-color: green;
     border-radius: 0 0 10px 10px;
+    cursor: pointer;
 
     p{
         color: #FFFFFF;
@@ -46,10 +75,83 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    transform: translateY(-10%);
+
+    max-height: 700px;
+    //transform: translateY(-10%);
     box-shadow: 0px 0px 20px #00000045;
     background-color: #FFF;
     
-    margin: 2rem;
+    margin: 0 2rem;
     padding: 1rem;
 }
+
+.messages-item {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: baseline;
+    margin-right: auto;
+    list-style: none;
+    background-color:#cbf1fe;
+    border-radius: 0.5rem;
+   // padding: 5px;
+    width: max-content;
+    color: #0b415dFF;
+    word-wrap: break-word;
+    //word-break: break-word;
+
+    p {
+        margin: 0.5rem;
+    }
+}
+
+.you-message {
+    margin: 0;
+    margin-left: auto;
+    background-color: #279eee;
+    color: #FFF;
+    
+    
+}
+ .messages-date {
+     font-size: large;
+ }
+
+li {
+    max-width: 500px;
+}
+
+// textarea{
+//     width: 90%;
+//     rows:3;
+// }
+
+
+
+
+
+.textareaElement {
+    width: 90%;
+    min-height: 17px;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .input-menu {
+      display: flex;
+      flex-direction: row;
+      margin: 1rem;
+
+      img {
+          margin: 0.5rem;
+      }
+  }
+
+  .stok {
+//padding-left: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }

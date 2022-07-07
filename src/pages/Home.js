@@ -35,7 +35,8 @@ export const Home = () => {
                 <p className="lead">
                     Версия приложения <strong>1.0.4</strong>
                 </p>
-                <a onClick={logOut} > выйти </a>
+                <a onClick={logOut} > выйти из аккаунта</a>
+                
                 <a href="/#/visits" > мои посещения </a>
         </div>
         )

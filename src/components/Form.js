@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { api } from "../helpers/api";
 import { blurHandler } from "../helpers/validations";
-import { setCookie } from "../helpers/cookie";
+import { getCookie,setCookie } from "../helpers/cookie";
+import { useNavigate } from "react-router-dom";
 import './form.scss';
 
 export const Form = ({clbFunction}) => {
@@ -9,7 +10,7 @@ export const Form = ({clbFunction}) => {
     const [phone, setPhone] = useState('');
     const [phoneDirty, setPhoneDirty] = useState(false);
     const [phoneError, setPhoneError] = useState('Номер не может быть пустым');
-
+    let navigate = useNavigate();
 
     const phoneHandler = () => {
         setPhone(textInput.current.value);
@@ -29,12 +30,12 @@ export const Form = ({clbFunction}) => {
 
            setPhone(textInput.current.value);            
            setCookie('PHONEUSER',textInput.current.value,{});
-           let body = {medorgId : 1,phone: textInput.current.value}
+           let body = {medorgId : getCookie('MEDORGID'),phone: textInput.current.value}
             body = new URLSearchParams(Object.entries(body)).toString(); 
 
             async function PhoneConfirmation(){
                 let temp = await api(
-                    'https://test.simplex48.ru/api/Mobile/PhoneConfirmation',
+                    `${getCookie('PROXISERVERLINK')}/api/Mobile/PhoneConfirmation`,
                     'POST',
                     body,
                     {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -78,8 +79,13 @@ export const Form = ({clbFunction}) => {
                             <button  onClick={getSMSCode} type="button" className=" btn-primary ">Отправить смс на номер</button>     
                             
                             <div className="help-text">
-                                <a href="/">Политика конфидециальности</a> 
+                                <a class="link-style">Политика конфидециальности</a> 
                             </div> 
+
+                            <div className="help-text">
+                                <a class="link-style" onClick={e=> navigate('/registration')}>Есть аккаунт? Войдите</a> 
+                            </div> 
+                            
 
                         </div>
 

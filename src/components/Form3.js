@@ -92,7 +92,7 @@ export const Form3 = ({clbFunction,clbObject}) => {
         //alert( patronymic.charAt(1000) );
 
             let urlencoded = new URLSearchParams();
-            urlencoded.append("ClinicId", "1");
+            urlencoded.append("ClinicId", getCookie('MEDORGID'));
             urlencoded.append("BranchId", "0");
             urlencoded.append("Barcode", "0");
             urlencoded.append("Patient[Phone]", clbObject['phone']);
@@ -114,7 +114,7 @@ export const Form3 = ({clbFunction,clbObject}) => {
             async function Auth(){
                 
                 let temp = await api(
-                    'https://test.simplex48.ru/api/registration/authorization',
+                    `${getCookie('PROXISERVERLINK')}/api/registration/authorization`,
                     'POST',
                     urlencoded,
                     paymentHeaders

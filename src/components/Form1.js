@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../helpers/api";
 import { blurHandler } from "../helpers/validations";
+import { getCookie } from "../helpers/cookie";
 import './form.scss';
 
 export const Form1 = ({clbFunction,clbObject}) => {
@@ -49,12 +50,12 @@ export const Form1 = ({clbFunction,clbObject}) => {
     function getCode(event) {
         if(codeDirty && codeError ==="") {
             setCode(textInput.current.value);
-            let body = {medorgId : 1,phone: clbObject['phone'], code: code}
+            let body = {medorgId : getCookie('MEDORGID'),phone: clbObject['phone'], code: code}
             body = new URLSearchParams(Object.entries(body)).toString(); 
         
             async function CodeConfirmation(){
                 let temp = await api(
-                    'https://test.simplex48.ru/api/Mobile/CodeConfirmation',
+                    `${getCookie('PROXISERVERLINK')}/api/Mobile/CodeConfirmation`,
                     'POST',
                      body,
                     {'Content-Type': 'application/x-www-form-urlencoded'}

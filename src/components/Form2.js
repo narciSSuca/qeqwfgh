@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../helpers/api";
 import { blurHandler } from "../helpers/validations";
-import { setCookie } from "../helpers/cookie";
+import { getCookie, setCookie } from "../helpers/cookie";
 import { useNavigate } from "react-router-dom";
 import './form.scss';
+import '../components/ModalPayment/modalP.scss';
 
 export const Form2 = ({clbFunction,clbObject}) => {
 
@@ -37,6 +38,14 @@ export const Form2 = ({clbFunction,clbObject}) => {
     const [password, setPassword] = useState(clbObject['password_test']);
     const [passwordDirty, setPasswordDirty] = useState(dirty);
     const [passwordError, setPasswordError] = useState(error);
+    const [arrayUser, setArrayUser] = useState([]);
+    const [modalActive, setModalActive] = useState(false);
+    const [selectedUserBarcode, setSelectedUserBarcode] = useState(false);
+
+    useEffect(() => {
+        console.log(selectedUserBarcode);
+    }, [selectedUserBarcode])
+    
     let textInput = React.createRef();
     const navigate = useNavigate();
 
@@ -52,6 +61,33 @@ export const Form2 = ({clbFunction,clbObject}) => {
         }
     }
 
+    function getAuthOrRegistr() {
+        async function ChecAuth(){
+            let body = {phone: clbObject['phone'], medorgId: getCookie('MEDORGID')}
+            body = new URLSearchParams(Object.entries(body)).toString();
+            let temp = await api(
+                `${getCookie('PROXISERVERLINK')}/api/userprofiles`,
+                'POST',
+                 body,
+                {'Content-Type': 'application/x-www-form-urlencoded'}
+            )
+
+            if (temp.length > 0) {
+                console.log(temp);
+                setArrayUser(temp);
+                setModalActive(true);
+            } else {
+               
+            }
+        }
+        ChecAuth();
+    }
+
+    function loginPacient() {
+        setCookie('BARCODE', selectedUserBarcode.barcode);
+        navigate('/home');
+    }
+
     function getPassword(event) {
         if(passwordDirty && passwordError ==="") {
             setPassword(textInput.current.value);
@@ -61,7 +97,7 @@ export const Form2 = ({clbFunction,clbObject}) => {
         
             async function GetToken(){
                 let temp = await api(
-                    'https://test.simplex48.ru/Token',
+                    `${getCookie('PROXISERVERLINK')}/Token`,
                     'POST',
                      body,
                     {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -70,7 +106,8 @@ export const Form2 = ({clbFunction,clbObject}) => {
                     setPasswordError(temp['error_description']);
                 } else {
                     setCookie('token', temp['access_token'],{});
-                    clbFunction(clbObject);
+                    //getAuthOrRegistr();
+                    clbFunction(clbObject)
                 }
 
 
@@ -82,6 +119,25 @@ export const Form2 = ({clbFunction,clbObject}) => {
 
     return (
         <div className="container">
+            
+            <div className={modalActive ? "modal active" : "modal"} >
+            <div className="modal__content new-size" onClick={e => e.stopPropagation()}>
+                <p>Ваш номер уже зарегестрирован выберете аккаунт пациента или перейдите к регистрации нового аккаунта</p>
+                <ul>
+                    {arrayUser.map(user=>(
+                        <div  className={selectedUserBarcode.id == user.id ? "user-item user-selected" : "user-item"} onClick={e=> setSelectedUserBarcode(user)}>
+                            <p><b>{user.first_name} {user.patronymic} {user.surname}.</b></p>
+                        </div>
+                    ))}
+                </ul>
+                {selectedUserBarcode ?
+                <button onClick={e=> loginPacient()}> Войти как {selectedUserBarcode.first_name} {selectedUserBarcode.patronymic} {selectedUserBarcode.surname}.</button> 
+                 : 
+                 ""}
+                <button className="cancel-button" onClick={e => clbFunction(clbObject)} >Продолжить регистрацию</button>              
+            </div>
+        </div>
+            
             <div className="row">
 
             <div className="col">

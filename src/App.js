@@ -6,6 +6,7 @@ import {LoyaltyCard} from './pages/LoyaltyCard';
 import {CardVisit} from "./pages/CardVisit";
 import {Feedback} from "./pages/Feedback";
 import {Authorization} from './pages/Authorization';
+import {Registration} from './pages/Registration';
 import {Notification} from './pages/Notification';
 import {FogotPassword} from './pages/FogotPassword';
 import {DocumentDogovor} from './pages/DocumentDogovor';
@@ -23,6 +24,8 @@ const App = () => {
     )
     setCookie('MEDORGID',temp['medorgId'],{});
     setCookie('CLINIKNAME',temp['clinik_name'],{});
+    setCookie('SERVERLINK', temp['serverLink'],{});
+    setCookie('PROXISERVERLINK', temp['proxiServerLink'],{});
     }
     GetMedicalDate();
 
@@ -39,6 +42,7 @@ const App = () => {
         <Route path={'/notification'} element={<Notification/>}/> 
         <Route path={'/document'} element={<DocumentDogovor/>}/>
         <Route path={'/feedback'} element={<Feedback/>}/>
+        <Route path={'/registration'} element={<Registration/>} />
       </Routes>   
     </HashRouter>
     );    

@@ -14,6 +14,9 @@ export const Form4 = ({clbFunction,clbObject}) => {
             let temp = await api(
                 'https://test.simplex48.ru/api/registration/CheckAuthorization',
                 'POST',
+                
+                // new URLSearchParams(Object.entries({GUID:"84c2b750-f447-41d4-a77e-b23bab0c7d0a"})).toString(),
+                // {'Content-Type': 'application/x-www-form-urlencoded'}                
                 new URLSearchParams(Object.entries({GUID:getCookie('GUID')})).toString(),
                 {'Content-Type': 'application/x-www-form-urlencoded'}
             )    
@@ -87,14 +90,16 @@ export const Form4 = ({clbFunction,clbObject}) => {
                  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
                  let cardPers = await api(
-                     'https://patient.simplex48.ru/api/Mobile/ClientCardInfo',
+                    `${getCookie('PROXISERVERLINK')}/api/Mobile/ClientCardInfo`,
                      'POST',
                      body,
                      myHeaders
                  )
+                 console.log(cardPers);
                  setCookie("CARDPERS",JSON.stringify(cardPers),{});
                  clearTimeout(chechAuthInterval);
-                window.location.href = 'https://narcissuca.github.io/#/home';
+                 navigate('/visits');
+                 //window.location.href = 'https://narcissuca.github.io/#/home';
               //  window.location.href = 'http://localhost:3000/#/home';
              }
 

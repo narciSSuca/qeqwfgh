@@ -45,3 +45,20 @@
     background-color:  #FFFFFF;
     padding-top: 2px;
 }
+
+.user-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    
+    height: 3rem;
+}
+
+.user-selected {
+    background-color: #0d6efd;
+    border-radius: 1rem;
+    p {
+        color: #fff;
+    }
+}

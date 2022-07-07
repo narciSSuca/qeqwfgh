@@ -40,6 +40,7 @@ export const MyVisitsList = () => {
                     <p className="text-try">оплачено</p>
                   </div>
             </>;
+            
     }
 
     if(encodeArray.documentPaySum !== null && encodeArray.documentPaySum > 0) {
@@ -49,15 +50,31 @@ export const MyVisitsList = () => {
                     <p>Итого: {encodeArray.sumDiscount}.0 ₽.</p>
                     <p className="text-try">оплачено {encodeArray.documentPaySum}</p>
                   </div>
-              </>
+              </>;
+        if (encodeArray.documentPaySum == 0) {
+          request = <>
+                <div className="payment-block">  
+                    <p>Итого: {encodeArray.sumDiscount}.0 ₽.</p>
+                    <p className="text-try">оплачено</p>
+                  </div>      
+      </>;      
+        }
       } else if (encodeArray.order !== null && encodeArray.order.orderSum !== null && encodeArray.order.orderSum < encodeArray.documentSumDiscount) {
         request = <>
                 <div className="payment-block">  
                     <p>Итого: {encodeArray.sumDiscount}.0 ₽.</p>
-                    <p className="text-try">оплачено {encodeArray.documentPaySum}</p>
+                    <p className="text-try">оплачено{encodeArray.documentPaySum}</p>
                   </div>
                 
       </>;
+        if (encodeArray.documentPaySum == 0) {
+          request = <>
+                <div className="payment-block">  
+                    <p>Итого: {encodeArray.sumDiscount}.0 ₽.</p>
+                    <p className="text-try">оплачено</p>
+                  </div>      
+      </>;
+        }
       } 
     }
 
@@ -98,7 +115,7 @@ export const MyVisitsList = () => {
                     <p>Итого: {encodeArray.sumDiscount}.0 ₽.</p>
               </div>
                 <div className="text-try">
-                  <p>оплачено {encodeArray.documentPaySum}</p>
+                  <p>оплачено{encodeArray.documentPaySum}</p>
                 </div>
                 </>; 
         
@@ -111,13 +128,26 @@ export const MyVisitsList = () => {
                     <p>Итого: {encodeArray.sumDiscount}.0 ₽.</p>
               </div>
       <div className="text-try">
-        <p>оплачено {encodeArray.documentPaySum}</p>
+        <p>оплачено 1111111{encodeArray.documentPaySum}</p>
       </div>
       <div>
         <button  >Оплатить</button>
       </div>
       </>;
-    }
+
+      if (encodeArray.documentPaySum == 0) {
+        request = <>
+        <div className="payment-block">  
+                      <p>Итого: {encodeArray.sumDiscount}.0 ₽.</p>
+                </div>
+        <div className="text-try">
+          <p>оплачено </p>
+        </div>
+        <div>
+          <button  >Оплатить</button>
+        </div>
+        </>;
+    }}
      
      return request;
   }

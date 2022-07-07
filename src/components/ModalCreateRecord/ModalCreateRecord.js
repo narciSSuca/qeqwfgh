@@ -377,8 +377,8 @@ export const ModalCreateRecord = ({active,setActive,specialization}) => {
             }
             console.log(qwe);
             setDays(qwe);
-            setSelectedMonths(4);
-            createCalendar( 2022, 4);
+            setSelectedMonths(7);
+            createCalendar( 2022, 7);
 
         } else {
             let elem = document.getElementById('calendar');
@@ -469,6 +469,8 @@ export const ModalCreateRecord = ({active,setActive,specialization}) => {
                 urlencoded.append("middleName", MYINFOARRAY.surname);
                 urlencoded.append("lastName", MYINFOARRAY.patronymic);
                 urlencoded.append("birthday", MYINFOARRAY.bornDate);
+
+                console.log(urlencoded);
 
                 for (let index = 0; index < servicesSelected.length; index++) {
                     urlencoded.append(`services[${index}][number]`, servicesSelected[index].number);
